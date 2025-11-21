@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import { Database } from './database.js';
 import { MessageProcessor } from './messageProcessor.js';
 import { ReportGenerator } from './reportGenerator.js';
+import { AudioProcessor } from './audioProcessor.js';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ class FinanceAssistant {
     this.db = new Database();
     this.messageProcessor = new MessageProcessor();
     this.reportGenerator = new ReportGenerator(this.db);
+    this.audioProcessor = new AudioProcessor();
     
     // Flag para prevenir loop (ativar para testes)
     // Por padrão ativado, mas pode ser desativado com PREVENT_LOOP=false no .env
@@ -134,9 +136,9 @@ class FinanceAssistant {
     // Mensagem criada (inclui mensagens próprias)
     this.client.on('message_create', async (message) => {
       console.log('🔔 Evento message_create disparado');
-      // Só processar se for mensagem própria E não for uma resposta automática do bot
-      // Verificar se tem body e não é uma mensagem de status
-      if (message.fromMe && message.body && !message.isStatus) {
+      // Processar mensagens próprias (incluindo áudio)
+      // Verificar se não é uma mensagem de status
+      if (message.fromMe && !message.isStatus) {
         // Verificar se já foi processada antes de processar
         if (!this.isMessageProcessed(message)) {
           await this.handleMessage(message);
@@ -158,7 +160,45 @@ class FinanceAssistant {
         return;
       }
 
-      // Ignorar mensagens que são respostas do próprio bot
+      // Verificar se mensagem já foi processada (prevenir loop)
+      if (this.isMessageProcessed(message)) {
+        return;
+      }
+
+      // Log inicial para debug
+      console.log('📨 Mensagem recebida!');
+      console.log('From:', message.from);
+      console.log('FromMe:', message.fromMe);
+      console.log('Body:', message.body);
+      console.log('Type:', message.type);
+      console.log('Has Media:', message.hasMedia);
+      console.log('Message ID:', message.id?._serialized || message.id);
+
+      // Processar mensagens de áudio (voice notes) PRIMEIRO, antes de outras verificações
+      if (message.type === 'ptt' || message.type === 'audio' || message.hasMedia) {
+        console.log('🎤 Mensagem de áudio detectada (type:', message.type, ', hasMedia:', message.hasMedia, ')');
+        
+        // Verificar se realmente é áudio
+        const media = await message.downloadMedia();
+        if (media && (media.mimetype?.includes('audio') || media.mimetype?.includes('ogg'))) {
+          console.log('✅ Confirmado: é uma mensagem de áudio (mimetype:', media.mimetype, ')');
+          const transcribedText = await this.audioProcessor.transcribeAudio(message);
+          
+          if (transcribedText) {
+            console.log('📝 Texto transcrito:', transcribedText);
+            // Substituir o body da mensagem com o texto transcrito para processar normalmente
+            message.body = transcribedText;
+          } else {
+            await message.reply('❌ Não foi possível transcrever o áudio. Verifique se a OpenAI API Key está configurada e tente novamente, ou envie uma mensagem de texto.');
+            this.markMessageAsProcessed(message); // Marcar como processada para não tentar novamente
+            return;
+          }
+        } else {
+          console.log('⚠️ Tem hasMedia mas não é áudio (mimetype:', media?.mimetype, ')');
+        }
+      }
+
+      // Ignorar mensagens que são respostas do próprio bot (após processar áudio)
       if (message.fromMe && !message.body) {
         console.log('⏭️ Ignorando mensagem própria sem corpo (provavelmente resposta do bot)');
         return;
@@ -181,19 +221,6 @@ class FinanceAssistant {
           return;
         }
       }
-
-      // Verificar se mensagem já foi processada (prevenir loop)
-      if (this.isMessageProcessed(message)) {
-        return;
-      }
-
-      // Log inicial para debug
-      console.log('📨 Mensagem recebida!');
-      console.log('From:', message.from);
-      console.log('FromMe:', message.fromMe);
-      console.log('Body:', message.body);
-      console.log('Type:', message.type);
-      console.log('Message ID:', message.id?._serialized || message.id);
 
       // Se não tem corpo de texto, ignorar (não marca como processada)
       if (!message.body || message.body.trim().length === 0) {

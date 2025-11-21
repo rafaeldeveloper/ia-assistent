@@ -5,6 +5,7 @@ Um bot inteligente para WhatsApp que ajuda você a organizar suas finanças pess
 ## 🚀 Funcionalidades
 
 - ✅ Registro de gastos e receitas através de mensagens naturais
+- ✅ Suporte a mensagens de áudio (voice notes) com transcrição automática
 - ✅ Processamento inteligente de mensagens (com ou sem IA)
 - ✅ Armazenamento de transações em banco de dados SQLite
 - ✅ Geração de relatórios financeiros (semanal, mensal, por período)
@@ -16,7 +17,8 @@ Um bot inteligente para WhatsApp que ajuda você a organizar suas finanças pess
 
 - Node.js 18+ instalado
 - WhatsApp instalado no celular
-- (Opcional) Chave da API OpenAI para processamento mais inteligente
+- (Obrigatório para áudio) Chave da API OpenAI para transcrição de áudio
+- (Opcional) Chave da API OpenAI para processamento mais inteligente de texto
 
 ## 🔧 Instalação
 
@@ -47,10 +49,11 @@ npm start
 2. Escaneie o QR Code que aparecerá no terminal com seu WhatsApp
 
 3. Envie mensagens descrevendo seus gastos e receitas:
-   - "Gastei R$ 50 no supermercado"
-   - "Recebi R$ 1000 de salário"
-   - "Almoço R$ 25"
-   - "Paguei R$ 200 de conta de luz"
+   - **Texto**: "Gastei R$ 50 no supermercado"
+   - **Texto**: "Recebi R$ 1000 de salário"
+   - **Texto**: "Almoço R$ 25"
+   - **Texto**: "Paguei R$ 200 de conta de luz"
+   - **Áudio**: Envie uma mensagem de voz (voice note) descrevendo sua transação
 
 4. Use os comandos disponíveis:
    - `/ajuda` - Mostra ajuda
@@ -80,8 +83,10 @@ ia-finance-assistent/
 │   ├── index.js           # Arquivo principal do bot
 │   ├── database.js        # Gerenciamento do banco de dados
 │   ├── messageProcessor.js # Processamento de mensagens
+│   ├── audioProcessor.js  # Processamento de áudio (transcrição)
 │   └── reportGenerator.js  # Geração de relatórios
 ├── data/                  # Banco de dados SQLite (criado automaticamente)
+├── temp/                  # Arquivos temporários de áudio (criado automaticamente)
 ├── .env                   # Variáveis de ambiente (criar manualmente)
 ├── package.json
 └── README.md
@@ -103,8 +108,10 @@ npm run dev
 ## 📝 Notas
 
 - O bot funciona melhor com a API da OpenAI configurada, mas também funciona sem ela usando processamento básico
+- **Transcrição de áudio requer OpenAI API Key** (usa Whisper API)
 - O banco de dados é criado automaticamente na primeira execução
 - Os dados são armazenados localmente no seu computador
+- Arquivos de áudio temporários são criados e removidos automaticamente durante a transcrição
 
 ## 🤝 Contribuindo
 
