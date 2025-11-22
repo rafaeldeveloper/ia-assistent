@@ -12,3 +12,6 @@ temp/
 # Não ignorar a pasta docs (precisa para GitHub Pages)
 # docs/
 
+# Dashboard node_modules
+dashboard/node_modules/
+

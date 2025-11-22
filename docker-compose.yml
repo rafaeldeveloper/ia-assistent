@@ -19,9 +19,22 @@ services:
       - ./.wwebjs_cache:/app/.wwebjs_cache
       # Diretório temporário para áudios
       - ./temp:/app/temp
-    # Se precisar expor porta no futuro
-    # ports:
-    #   - "3000:3000"
     # Para rodar em modo headless (sem display)
     shm_size: '2gb'
+
+  dashboard:
+    build: ./dashboard
+    container_name: finance-dashboard
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DB_PATH=/app/data/finances.db
+      - DASHBOARD_PORT=3000
+    volumes:
+      # Compartilhar o mesmo banco de dados
+      - ./data:/app/data
+    depends_on:
+      - finance-assistant
 

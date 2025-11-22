@@ -13,6 +13,7 @@ Um bot inteligente para WhatsApp que ajuda você a organizar suas finanças pess
 - ✅ Categorização automática de transações
 - ✅ Suporte a múltiplos usuários
 - ✅ Landing page moderna para apresentação do projeto
+- ✅ Dashboard web com gráficos e visualizações
 
 ## 📋 Pré-requisitos
 
@@ -91,6 +92,13 @@ ia-finance-assistent/
 │   ├── styles.css         # Estilos
 │   ├── script.js          # JavaScript
 │   └── README.md          # Instruções de deploy
+├── dashboard/             # Dashboard web
+│   ├── server.js          # Servidor Express
+│   ├── public/            # Frontend
+│   │   ├── index.html     # Página do dashboard
+│   │   ├── styles.css     # Estilos
+│   │   └── app.js         # JavaScript
+│   └── README.md          # Documentação do dashboard
 ├── data/                  # Banco de dados SQLite (criado automaticamente)
 ├── temp/                  # Arquivos temporários de áudio (criado automaticamente)
 ├── .env                   # Variáveis de ambiente (criar manualmente)
@@ -107,6 +115,41 @@ ia-finance-assistent/
 - O banco de dados é local e armazenado em `data/finances.db`
 - Cada usuário tem seus próprios dados isolados
 - As credenciais do WhatsApp são armazenadas localmente em `.wwebjs_auth/`
+
+## 📊 Dashboard Web
+
+Visualize seus dados financeiros em um dashboard moderno com gráficos interativos.
+
+### Como usar:
+
+1. **Instalar dependências:**
+```bash
+cd dashboard
+npm install
+```
+
+2. **Iniciar o servidor:**
+```bash
+npm start
+```
+
+3. **Acessar no navegador:**
+```
+http://localhost:3000
+```
+
+4. **Com Docker:**
+```bash
+docker-compose up dashboard
+```
+
+O dashboard consome a mesma base de dados do bot e oferece:
+- 📈 Gráficos de receitas e despesas
+- 🏷️ Gastos por categoria
+- 📅 Evolução mensal e diária
+- 📋 Lista de transações
+
+Veja mais detalhes em `dashboard/README.md`
 
 ## 🌐 Landing Page
 

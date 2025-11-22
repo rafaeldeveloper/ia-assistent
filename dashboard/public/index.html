@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Assistente de Finanças</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1>💰 Dashboard Financeiro</h1>
+                <div class="header-controls">
+                    <select id="userSelect" class="user-select">
+                        <option value="">Carregando usuários...</option>
+                    </select>
+                    <select id="periodSelect" class="period-select">
+                        <option value="month">Este Mês</option>
+                        <option value="week">Esta Semana</option>
+                        <option value="year">Este Ano</option>
+                        <option value="all">Todo Período</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Loading -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Carregando dados...</p>
+        </div>
+
+        <!-- Main Content -->
+        <main class="dashboard-main" id="mainContent" style="display: none;">
+            <!-- Summary Cards -->
+            <section class="summary-cards">
+                <div class="card card-income">
+                    <div class="card-icon">💰</div>
+                    <div class="card-content">
+                        <h3>Receitas</h3>
+                        <p class="card-value" id="totalIncome">R$ 0,00</p>
+                    </div>
+                </div>
+                <div class="card card-expense">
+                    <div class="card-icon">💸</div>
+                    <div class="card-content">
+                        <h3>Despesas</h3>
+                        <p class="card-value" id="totalExpense">R$ 0,00</p>
+                    </div>
+                </div>
+                <div class="card card-balance">
+                    <div class="card-icon">📊</div>
+                    <div class="card-content">
+                        <h3>Saldo</h3>
+                        <p class="card-value" id="totalBalance">R$ 0,00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Charts Row -->
+            <section class="charts-row">
+                <div class="chart-container">
+                    <h2>Gastos por Categoria</h2>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2>Evolução Mensal</h2>
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Daily Chart -->
+            <section class="chart-full">
+                <div class="chart-container">
+                    <h2>Evolução Diária (Últimos 30 dias)</h2>
+                    <canvas id="dailyChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Transactions Table -->
+            <section class="transactions-section">
+                <h2>Últimas Transações</h2>
+                <div class="table-container">
+                    <table id="transactionsTable">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Tipo</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsBody">
+                            <tr>
+                                <td colspan="5" class="empty-state">Nenhuma transação encontrada</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
