@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assistente de Finanças Pessoais para WhatsApp - Organize seus gastos e receitas através de mensagens simples">
+    <title>Assistente de Finanças - WhatsApp Bot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <span class="logo-icon">💰</span>
+                <span class="logo-text">FinanceBot</span>
+            </div>
+            <ul class="nav__menu">
+                <li><a href="#features">Recursos</a></li>
+                <li><a href="#how-it-works">Como Funciona</a></li>
+                <li><a href="#examples">Exemplos</a></li>
+                <li><a href="https://github.com/seu-usuario/ia-finance-assistent" target="_blank" class="nav__github">GitHub</a></li>
+            </ul>
+            <button class="nav__toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero__container container">
+            <div class="hero__content">
+                <h1 class="hero__title">
+                    Organize suas <span class="gradient-text">finanças pessoais</span> pelo WhatsApp
+                </h1>
+                <p class="hero__description">
+                    Um assistente inteligente que registra seus gastos e receitas através de mensagens simples. 
+                    Fale ou digite, nós entendemos!
+                </p>
+                <div class="hero__buttons">
+                    <a href="https://github.com/seu-usuario/ia-finance-assistent" target="_blank" class="btn btn--primary">
+                        <span>🚀 Começar Agora</span>
+                    </a>
+                    <a href="#how-it-works" class="btn btn--secondary">
+                        <span>📖 Ver Como Funciona</span>
+                    </a>
+                </div>
+                <div class="hero__stats">
+                    <div class="stat">
+                        <div class="stat__number">100%</div>
+                        <div class="stat__label">Gratuito</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__number">24/7</div>
+                        <div class="stat__label">Disponível</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat__number">🎤</div>
+                        <div class="stat__label">Áudio & Texto</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__image">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="chat-message user">
+                            <p>Gastei R$ 50 no supermercado</p>
+                        </div>
+                        <div class="chat-message bot">
+                            <p>✅ Transação registrada!<br>
+                            💵 Valor: R$ 50,00<br>
+                            📝 Descrição: Supermercado<br>
+                            📅 Data: 22/11/2024</p>
+                        </div>
+                        <div class="chat-message user voice">
+                            <p>🎤 Mensagem de voz...</p>
+                        </div>
+                        <div class="chat-message bot">
+                            <p>✅ Transação registrada!<br>
+                            💵 Valor: R$ 25,00<br>
+                            📝 Descrição: Almoço</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section__title">Recursos Incríveis</h2>
+            <p class="section__subtitle">Tudo que você precisa para organizar suas finanças</p>
+            <div class="features__grid">
+                <div class="feature-card">
+                    <div class="feature-card__icon">💬</div>
+                    <h3 class="feature-card__title">Mensagens Naturais</h3>
+                    <p class="feature-card__description">
+                        Fale ou digite de forma natural. "Gastei R$ 50 no supermercado" é suficiente!
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">🎤</div>
+                    <h3 class="feature-card__title">Suporte a Áudio</h3>
+                    <p class="feature-card__description">
+                        Envie mensagens de voz! O assistente transcreve e processa automaticamente usando IA.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">📊</div>
+                    <h3 class="feature-card__title">Relatórios Detalhados</h3>
+                    <p class="feature-card__description">
+                        Gere relatórios semanais, mensais ou por período específico com um simples comando.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">🏷️</div>
+                    <h3 class="feature-card__title">Categorização Automática</h3>
+                    <p class="feature-card__description">
+                        Categorias como Alimentação, Transporte e Moradia são identificadas automaticamente.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">🔒</div>
+                    <h3 class="feature-card__title">100% Privado</h3>
+                    <p class="feature-card__description">
+                        Seus dados ficam armazenados localmente. Nada é compartilhado com terceiros.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">⚡</div>
+                    <h3 class="feature-card__title">Processamento Inteligente</h3>
+                    <p class="feature-card__description">
+                        Usa IA para entender contexto e extrair informações financeiras com precisão.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section__title">Como Funciona</h2>
+            <p class="section__subtitle">Simples, rápido e eficiente</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step__number">1</div>
+                    <div class="step__content">
+                        <h3 class="step__title">Configure o Bot</h3>
+                        <p class="step__description">
+                            Clone o repositório, configure suas variáveis de ambiente e inicie o bot.
+                            Escaneie o QR Code com seu WhatsApp.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step__number">2</div>
+                    <div class="step__content">
+                        <h3 class="step__title">Envie Suas Transações</h3>
+                        <p class="step__description">
+                            Envie mensagens de texto ou áudio descrevendo seus gastos e receitas.
+                            O bot entende linguagem natural!
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step__number">3</div>
+                    <div class="step__content">
+                        <h3 class="step__title">Visualize Relatórios</h3>
+                        <p class="step__description">
+                            Use comandos como /relatorio para ver seus gastos por categoria,
+                            saldo mensal e muito mais.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section id="examples" class="examples">
+        <div class="container">
+            <h2 class="section__title">Exemplos de Uso</h2>
+            <p class="section__subtitle">Veja como é fácil usar</p>
+            <div class="examples__grid">
+                <div class="example-card">
+                    <div class="example-card__header">
+                        <span class="example-card__icon">💸</span>
+                        <h3 class="example-card__title">Registrar Gastos</h3>
+                    </div>
+                    <div class="example-card__content">
+                        <div class="example-message user">
+                            <p>"Gastei R$ 50 no supermercado"</p>
+                        </div>
+                        <div class="example-message bot">
+                            <p>✅ Transação registrada!<br>💵 Valor: R$ 50,00<br>📝 Descrição: Supermercado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <div class="example-card__header">
+                        <span class="example-card__icon">💰</span>
+                        <h3 class="example-card__title">Registrar Receitas</h3>
+                    </div>
+                    <div class="example-card__content">
+                        <div class="example-message user">
+                            <p>"Recebi R$ 1000 de salário"</p>
+                        </div>
+                        <div class="example-message bot">
+                            <p>✅ Transação registrada!<br>💵 Valor: R$ 1.000,00<br>📝 Descrição: Salário</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <div class="example-card__header">
+                        <span class="example-card__icon">📊</span>
+                        <h3 class="example-card__title">Ver Relatórios</h3>
+                    </div>
+                    <div class="example-card__content">
+                        <div class="example-message user">
+                            <p>"/relatorio"</p>
+                        </div>
+                        <div class="example-message bot">
+                            <p>📊 Relatório Financeiro<br>💰 Receitas: R$ 1.000,00<br>💸 Despesas: R$ 50,00<br>✅ Saldo: R$ 950,00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta__content">
+                <h2 class="cta__title">Pronto para começar?</h2>
+                <p class="cta__description">
+                    Organize suas finanças de forma simples e inteligente. 
+                    Totalmente gratuito e open source.
+                </p>
+                <div class="cta__buttons">
+                    <a href="https://github.com/seu-usuario/ia-finance-assistent" target="_blank" class="btn btn--primary btn--large">
+                        <span>⭐ Ver no GitHub</span>
+                    </a>
+                    <a href="https://github.com/seu-usuario/ia-finance-assistent#readme" target="_blank" class="btn btn--secondary btn--large">
+                        <span>📖 Documentação</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <span class="logo-icon">💰</span>
+                        <span class="logo-text">FinanceBot</span>
+                    </div>
+                    <p class="footer__description">
+                        Assistente de Finanças Pessoais para WhatsApp
+                    </p>
+                </div>
+                <div class="footer__links">
+                    <div class="footer__column">
+                        <h4 class="footer__title">Projeto</h4>
+                        <ul>
+                            <li><a href="https://github.com/seu-usuario/ia-finance-assistent" target="_blank">GitHub</a></li>
+                            <li><a href="https://github.com/seu-usuario/ia-finance-assistent#readme" target="_blank">Documentação</a></li>
+                            <li><a href="https://github.com/seu-usuario/ia-finance-assistent/issues" target="_blank">Reportar Bug</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__column">
+                        <h4 class="footer__title">Recursos</h4>
+                        <ul>
+                            <li><a href="#features">Recursos</a></li>
+                            <li><a href="#how-it-works">Como Funciona</a></li>
+                            <li><a href="#examples">Exemplos</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 FinanceBot. Open Source - MIT License</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

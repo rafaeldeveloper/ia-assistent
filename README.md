@@ -12,6 +12,7 @@ Um bot inteligente para WhatsApp que ajuda você a organizar suas finanças pess
 - ✅ Listagem de gastos recentes
 - ✅ Categorização automática de transações
 - ✅ Suporte a múltiplos usuários
+- ✅ Landing page moderna para apresentação do projeto
 
 ## 📋 Pré-requisitos
 
@@ -85,6 +86,11 @@ ia-finance-assistent/
 │   ├── messageProcessor.js # Processamento de mensagens
 │   ├── audioProcessor.js  # Processamento de áudio (transcrição)
 │   └── reportGenerator.js  # Geração de relatórios
+├── docs/                  # Landing page (GitHub Pages)
+│   ├── index.html         # Página principal
+│   ├── styles.css         # Estilos
+│   ├── script.js          # JavaScript
+│   └── README.md          # Instruções de deploy
 ├── data/                  # Banco de dados SQLite (criado automaticamente)
 ├── temp/                  # Arquivos temporários de áudio (criado automaticamente)
 ├── .env                   # Variáveis de ambiente (criar manualmente)
@@ -101,6 +107,19 @@ ia-finance-assistent/
 - O banco de dados é local e armazenado em `data/finances.db`
 - Cada usuário tem seus próprios dados isolados
 - As credenciais do WhatsApp são armazenadas localmente em `.wwebjs_auth/`
+
+## 🌐 Landing Page
+
+O projeto inclui uma landing page moderna hospedada no GitHub Pages.
+
+- **Ver landing page**: [https://seu-usuario.github.io/ia-finance-assistent/](https://seu-usuario.github.io/ia-finance-assistent/)
+- **Instruções de deploy**: Veja `docs/README.md` e `docs/SETUP.md`
+
+### Personalizar antes do deploy:
+
+1. Abra `docs/index.html`
+2. Substitua `seu-usuario` pelo seu usuário do GitHub em todos os links
+3. Siga as instruções em `docs/SETUP.md`
 
 ## 🛠️ Desenvolvimento
 

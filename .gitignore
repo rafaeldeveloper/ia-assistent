@@ -9,3 +9,6 @@ temp/
 *.mp3
 *.wav
 
+# Não ignorar a pasta docs (precisa para GitHub Pages)
+# docs/
+
