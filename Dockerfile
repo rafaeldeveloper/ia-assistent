@@ -36,7 +36,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar dependências
-RUN npm ci --only=production
+# npm ci é mais rápido e determinístico quando package-lock.json está sincronizado
+RUN npm ci --omit=dev || (npm install --omit=dev --legacy-peer-deps && npm cache clean --force)
 
 # Copiar código da aplicação
 COPY . .
