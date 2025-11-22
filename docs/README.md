@@ -4,42 +4,37 @@ Landing page moderna e responsiva para o Assistente de Finanças Pessoais.
 
 ## 🚀 Deploy no GitHub Pages
 
+### ⚠️ IMPORTANTE: Configuração Inicial
+
+**Antes de usar GitHub Actions, você precisa habilitar o Pages manualmente:**
+
+1. Vá em **Settings > Pages** no seu repositório GitHub
+2. Em **Source**, selecione:
+   - **Deploy from a branch**
+   - **Branch**: `landing-page` (ou `main`)
+   - **Folder**: `/docs`
+3. Clique em **Save**
+4. **Depois** mude para **GitHub Actions** como source
+
+📖 **Veja instruções detalhadas em**: `GITHUB_PAGES_SETUP.md`
+
 ### Método 1: GitHub Actions (Automático)
 
-1. Crie um arquivo `.github/workflows/deploy.yml` na raiz do projeto:
+O workflow já está configurado em `.github/workflows/deploy-pages.yml`
 
-```yaml
-name: Deploy to GitHub Pages
+1. **Primeiro**: Configure o Pages manualmente (veja acima)
+2. **Depois**: Mude para "GitHub Actions" em Settings > Pages
+3. Faça push das mudanças - o deploy será automático!
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'docs/**'
+### Método 2: Manual (Mais Simples)
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-```
-
-2. Vá em Settings > Pages no GitHub
-3. Selecione "GitHub Actions" como source
-4. Faça push das mudanças - o deploy será automático!
-
-### Método 2: Manual
-
-1. Vá em Settings > Pages no seu repositório GitHub
-2. Em "Source", selecione a branch `main` e pasta `/docs`
-3. Clique em Save
-4. A página estará disponível em `https://seu-usuario.github.io/ia-finance-assistent/`
+1. Vá em **Settings > Pages** no seu repositório GitHub
+2. Em **Source**, selecione:
+   - **Deploy from a branch**
+   - **Branch**: `landing-page` (ou `main`)
+   - **Folder**: `/docs`
+3. Clique em **Save**
+4. A página estará disponível em `https://rafaeldeveloper.github.io/ia-finance-assistent/`
 
 ## 📝 Personalização
 
