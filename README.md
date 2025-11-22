@@ -88,6 +88,10 @@ ia-finance-assistent/
 ├── data/                  # Banco de dados SQLite (criado automaticamente)
 ├── temp/                  # Arquivos temporários de áudio (criado automaticamente)
 ├── .env                   # Variáveis de ambiente (criar manualmente)
+├── Dockerfile             # Configuração da imagem Docker
+├── docker-compose.yml     # Orquestração dos containers
+├── deploy.sh              # Script de deploy automatizado
+├── env.docker.example     # Exemplo de variáveis de ambiente para Docker
 ├── package.json
 └── README.md
 ```
@@ -104,6 +108,109 @@ Para executar em modo de desenvolvimento com auto-reload:
 ```bash
 npm run dev
 ```
+
+## 🐳 Deploy com Docker (AWS EC2)
+
+### Pré-requisitos
+- Instância EC2 com Ubuntu/Debian
+- Acesso SSH à instância
+- Porta 22 (SSH) aberta no Security Group
+
+### Deploy Rápido
+
+1. **Conecte-se à instância EC2:**
+```bash
+ssh -i sua-chave.pem ubuntu@seu-ip-ec2
+```
+
+2. **Clone o repositório:**
+```bash
+git clone <seu-repositorio>
+cd ia-finance-assistent
+```
+
+3. **Configure as variáveis de ambiente:**
+```bash
+cp env.docker.example .env
+nano .env  # Edite e adicione sua OPENAI_API_KEY
+```
+
+4. **Execute o script de deploy:**
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
+
+### Deploy Manual
+
+1. **Instalar Docker e Docker Compose:**
+```bash
+# Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker $USER
+
+# Docker Compose
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+2. **Construir e iniciar:**
+```bash
+docker-compose build
+docker-compose up -d
+```
+
+3. **Ver logs:**
+```bash
+docker-compose logs -f
+```
+
+### Comandos Úteis
+
+```bash
+# Parar o container
+docker-compose down
+
+# Reiniciar o container
+docker-compose restart
+
+# Ver logs em tempo real
+docker-compose logs -f
+
+# Entrar no container
+docker-compose exec finance-assistant sh
+
+# Reconstruir após mudanças
+docker-compose build --no-cache
+docker-compose up -d
+```
+
+### Estrutura Docker
+
+```
+ia-finance-assistent/
+├── Dockerfile              # Configuração da imagem Docker
+├── docker-compose.yml      # Orquestração dos containers
+├── .dockerignore          # Arquivos ignorados no build
+├── deploy.sh              # Script de deploy automatizado
+└── env.docker.example     # Exemplo de variáveis de ambiente
+```
+
+### Volumes Persistentes
+
+Os seguintes diretórios são persistidos como volumes:
+- `./data` - Banco de dados SQLite
+- `./.wwebjs_auth` - Autenticação do WhatsApp
+- `./.wwebjs_cache` - Cache do WhatsApp
+- `./temp` - Arquivos temporários de áudio
+
+### Notas Importantes
+
+- **QR Code**: Na primeira execução, você precisará escanear o QR Code. Use `docker-compose logs` para ver o QR Code no terminal.
+- **Persistência**: Os dados são salvos nos volumes, então mesmo reiniciando o container, seus dados permanecem.
+- **Recursos**: O container precisa de pelo menos 2GB de RAM e 1GB de espaço em disco.
+- **Rede**: Por padrão, não expõe portas. Se precisar expor alguma porta no futuro, edite o `docker-compose.yml`.
 
 ## 📝 Notas
 

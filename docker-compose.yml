@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  finance-assistant:
+    build: .
+    container_name: finance-assistant
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PREVENT_LOOP=true
+      # Adicione suas variáveis de ambiente aqui ou use um arquivo .env
+      # - OPENAI_API_KEY=${OPENAI_API_KEY}
+      # - DB_PATH=/app/data/finances.db
+    volumes:
+      # Persistir dados do banco de dados
+      - ./data:/app/data
+      # Persistir autenticação do WhatsApp
+      - ./.wwebjs_auth:/app/.wwebjs_auth
+      - ./.wwebjs_cache:/app/.wwebjs_cache
+      # Diretório temporário para áudios
+      - ./temp:/app/temp
+    # Se precisar expor porta no futuro
+    # ports:
+    #   - "3000:3000"
+    # Para rodar em modo headless (sem display)
+    shm_size: '2gb'
+
